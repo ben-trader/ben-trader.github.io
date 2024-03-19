@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>go away</title>
+        <style>
+            button {
+                padding: 1%;
+                background-color: red;
+                text-align: center;
+                align-content: center;
+                text-transform: uppercase;
+            }
+            h1{
+                text-align: center;
+                color: red;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>WHY ARE YOU HERE</h1>
+
+        <button type="button">if you press this one you just die. straight up. nothing special.</button>
+        <script>
+            const x = 'man what the hell';
+            console.log(x)
+
+            const button = document.querySelector("button");
+            button.addEventListener('click', runFunction);
+
+            function runFunction() {
+                // console.log("test");
+                const why = prompt("Why did you press that");
+                botton.textContent = `Look at this dumbass answer lmaooooo - ${why}`;
+            }
+        </script>
+
+        <button type="button">if you press this one you get $5 but a random grandma spontaneously combusts</button>
+        <script>
+            const button2 = document.querySelector("button");
+            button2.addEventListener('click', changeText);
+
+            function changeText() {
+                // console.log("test");
+                const why2 = prompt("really? for five dollars?");
+                heading.textContent = `dawg that was not chill at all`;
+            }
+        </script>
+    </body>
+</html>
