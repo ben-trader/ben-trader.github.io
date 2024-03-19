@@ -11,6 +11,8 @@
                 text-align: center;
                 align-content: center;
                 text-transform: uppercase;
+                display: block;
+                margin: 0 auto;
             }
             h1{
                 text-align: center;
@@ -23,30 +25,27 @@
     <body>
         <h1>WHY ARE YOU HERE</h1>
 
-        <button type="button">if you press this one you just die. straight up. nothing special.</button>
+        <button type="button" id="button1">if you press this one you just die. straight up. nothing special.</button>
         <script>
-            const x = 'man what the hell';
-            console.log(x)
-
-            const button = document.querySelector("button");
+            const button = document.querySelector("#button1");
             button.addEventListener('click', runFunction);
 
             function runFunction() {
                 // console.log("test");
                 const why = prompt("Why did you press that");
-                botton.textContent = `Look at this dumbass answer lmaooooo - ${why}`;
+                button.textContent = `Look at this dumbass answer lmaooooo - ${why}`;
             }
         </script>
 
-        <button type="button">if you press this one you get $5 but a random grandma spontaneously combusts</button>
+        <button type="button" id="button2">if you press this one you get $5 but a random grandma spontaneously combusts</button>
         <script>
-            const button2 = document.querySelector("button");
+            const button2 = document.querySelector("#button2");
             button2.addEventListener('click', changeText);
 
             function changeText() {
                 // console.log("test");
                 const why2 = prompt("really? for five dollars?");
-                heading.textContent = `dawg that was not chill at all`;
+                document.querySelector("h1").textContent = `dawg that was not chill at all`;
             }
         </script>
     </body>
