@@ -10,14 +10,14 @@ nav{
 
 h1{
     text-align: center;
-    color: aliceblue;
+    color: gold;
     padding-left: 15%;
     padding-right: 15%;
 }
 
 h2{
     text-align: center;
-    color: aliceblue;
+    color: goldenrod;
     padding-left: 15%;
     padding-right: 15%;
 }
@@ -41,4 +41,8 @@ p{
     text-align: center;
     padding-left: 20%;
     padding-right: 20%;
+}
+
+a:link {
+    color: white;
 }
