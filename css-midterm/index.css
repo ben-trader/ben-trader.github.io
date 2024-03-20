@@ -43,6 +43,10 @@ p{
     padding-right: 20%;
 }
 
-a:link {
+a:link{
     color: white;
+}
+
+a:visited{
+color: white;
 }
