@@ -12,7 +12,7 @@ let answer = '';
 async function newQuote() {
     console.log("hehe haha");
     try{
-        const response = await fetch("https://trivia.cyberwisp.com/getrandomchristmasquestion");
+        const response = await fetch("https://meowfacts.herokuapp.com/");
 
         // if(response.ok){
         //     throw Error(response.statusText);
