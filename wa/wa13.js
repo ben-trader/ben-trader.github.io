@@ -33,7 +33,7 @@ company.employees.employees[3].raiseEligible = false;
 console.log(company.employees);
 
 console.log("Question 3");
-console.log(employees.employees);
+console.log(company.employees.employees);
 
 let totalSalary = 0;
 for (x in company.employees.employees) {

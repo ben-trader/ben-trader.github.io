@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>JSON</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+    </section>
+
+  </body>
+  <script>
+    const section = document.querySelector('section');
+
+    let para1 = document.createElement('p');
+    let para2 = document.createElement('p');
+    let motherInfo = 'The mother cats are called ';
+    let kittenInfo = '';
+    const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json';
+
+    fetch(requestURL)
+    .then(response => response.json()) // Parse response as JSON
+    .then(data => displayCatInfo(data)) // Pass the parsed data to the displayCatInfo function
+
+    function displayCatInfo(catData) {
+      let total = 0;
+      let male = 0;
+
+      // Loop through each cat object in the JSON array
+      catData.forEach(cat => {
+        // Add the name of the mother cat to the motherInfo string
+        motherInfo += cat.name + ', ';
+
+        // Loop through each kitten of the current mother cat
+        cat.kittens.forEach(kitten => {
+          // Increment the total number of kittens
+          total++;
+
+          // Increment the count of male kittens if gender is 'm'
+          if (kitten.gender === 'm') {
+            male++;
+          }
+        });
+      });
+
+      // Remove the extra comma and space at the end of motherInfo
+      motherInfo = motherInfo.slice(0, -2);
+
+      // Make the kittenInfo string
+      kittenInfo = `Total kittens: ${total}, Male: ${male}, Female: ${total - male}`;
+
+      // Update paragraph text content
+      para1.textContent = motherInfo;
+      para2.textContent = kittenInfo;
+    }
+
+    section.appendChild(para1);
+    section.appendChild(para2);
+  </script>
+
+</html>
