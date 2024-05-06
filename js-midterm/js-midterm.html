@@ -5,8 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volume Changer</title>
   <style>
+    @keyframes bounceX {
+      0%, 100% {
+        left: 0;
+      }
+      50% {
+        left: calc(100vw - 200px);
+      }
+    }
+
+    @keyframes bounceY {
+      0%, 100% {
+        top: 0;
+      }
+      50% {
+        top: calc(100vh - 150px);
+      }
+    }
     body {
       background-image: url("https://xmple.com/wallpaper/gradient-grey-brown-linear-3840x2160-c2-808080-ffe4c4-a-285-f-14.svg");
+      background-color: aliceblue;
       height: 100vh;
       background-size: cover;
       background-position: center;
@@ -25,8 +43,13 @@
       color: rebeccapurple;
     }
 
+    h3 {
+    top: 17%;
+    text-align: center;
+    color: red;
+    }
+
     div {
-      margin: auto;
       width: 20%;
     }
 
@@ -39,6 +62,7 @@
       width: 200px;
       height: 150px;
       border: 2px solid black;
+      animation: bounceX 25s infinite alternate, bounceY 15s infinite alternate;
     }
     #volumeInput {
       position: absolute;
@@ -58,6 +82,43 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -66,12 +127,24 @@
   <div id="container">
     <label for="volumeInput">Enter desired volume (1-100):</label>
     <input type="number" id="volumeInput">
-    <button id="changeButton" onclick="changeVolume()">Change Volume</button>
-    <br>
-    <p id="output"></p>
+    <button id="changeButton" onclick="handleButtonClick()">Change Volume</button>
+  </div>
+  <h3 id="output"></h3>
+
+  <!-- Modal for human verification -->
+  <div id="humanVerification" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Are you human?</h2>
+      <label for="verificationInput">Yes or no:</label>
+      <input type="text" id="verificationInput">
+      <button onclick="verifyHuman()">Submit</button>
+    </div>
   </div>
 
   <script>
+    var clickCounter = 0;
+
     // Function to generate a random number between min and max
     function getRandomNumber(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
@@ -87,8 +160,38 @@
       return color;
     }
 
-    // Function to check if a color is within the red range
-function isRed(color) {
+  // Function to handle button click
+  function handleButtonClick() {
+  clickCounter++; // Increment click counter
+  console.log("Click counter:", clickCounter); // Debugging
+
+  // Check if it's the 5th click
+  if (clickCounter % 5 === 0) {
+    document.getElementById('humanVerification').style.display = 'block'; // Show verification form
+  } else {
+    changeVolume(); // Otherwise, proceed with volume change
+  }
+}
+
+    // Function to verify human
+    function verifyHuman() {
+      var userInput = document.getElementById('verificationInput').value.trim().toLowerCase();
+      if (userInput === "yes") {
+        closeModal(); // Close the modal
+        clickCounter = 0; // Reset click counter
+        changeVolume(); // Proceed with volume change
+      } else {
+        alert("Android detected. Please try again."); // Show error message
+      }
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('humanVerification').style.display = 'none'; // Hide the modal
+    }
+
+  // Function to check if a color is within the red range
+  function isRed(color) {
   // Get RGB values of the color
   var red = color.substring(1, 3);
   var green = color.substring(3, 5);
@@ -103,8 +206,8 @@ function isRed(color) {
   return redValue > 150 && greenValue < 100 && blueValue < 100;
 }
 
-// Function to check if a color is within the blue range
-function isBlue(color) {
+  // Function to check if a color is within the blue range
+  function isBlue(color) {
   // Get RGB values of the color
   var red = color.substring(1, 3);
   var green = color.substring(3, 5);
@@ -119,6 +222,13 @@ function isBlue(color) {
   return redValue < 100 && greenValue < 100 && blueValue > 150;
 }
 
+ // Check if the box hits the corner of the screen
+ var rect = container.getBoundingClientRect();
+      if (rect.left <= 0 && rect.top <= 0) {
+        // Open a link
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+      }
+
     // Function to change the volume
     function changeVolume() {
       var secretNumber = getRandomNumber(1, 100); // Generate a random number
@@ -127,19 +237,6 @@ function isBlue(color) {
 
       document.getElementById('output').textContent = "Output Volume: " + outputVolume;
       document.getElementById('volumeInput').value = ""; // Clear the input box
-
-      // Move the container to a random position on the page
-      var container = document.getElementById('container');
-      var containerWidth = container.offsetWidth;
-      var containerHeight = container.offsetHeight;
-      var maxX = window.innerWidth - containerWidth;
-      var maxY = window.innerHeight - containerHeight;
-
-      var randomX = getRandomNumber(0, maxX);
-      var randomY = getRandomNumber(0, maxY);
-
-      container.style.left = randomX + "px";
-      container.style.top = randomY + "px";
 
       // Change the color of the container
       var color = getRandomColor();
