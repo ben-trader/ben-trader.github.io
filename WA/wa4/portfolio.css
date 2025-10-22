@@ -1,0 +1,196 @@
+/*
+  Portfolio Design System — Dawn/Dusk
+  -------------------------------------------------
+  • Implements a dawn (light) theme with an optional dusk (dark) variant
+  • Accessible color contrast (WCAG AA for text & UI)
+  • Typographic scale, spacing, layout primitives
+  • Keyboard focus states, reduced‑motion safe
+
+  Default is the Dawn theme via :root. To switch to Dusk, add class="theme-dusk" on <body>.
+*/
+
+/* ------------------------------
+   Design Tokens — Dawn (light)
+------------------------------ */
+:root {
+  /* Color palette — Dawn */
+  --bg:            #fff8f2;   /* soft dawn haze */
+  --surface:       #ffffff;   /* cards/sections */
+  --text:          #1f2937;   /* slate 800 */
+  --muted:         #475569;   /* slate 600 */
+  --heading:       #111827;   /* near black */
+  --brand:         #f97316;   /* sunrise orange 500 */
+  --brand-strong:  #ea580c;   /* 600 */
+  --accent:        #2563eb;   /* sky/blue */
+  --link:          #1d4ed8;   /* link blue */
+  --border:        #e5e7eb;   /* subtle gray */
+  --focus:         #0ea5e9;   /* cyan focus */
+
+  /* Typography */
+  --font-sans:     "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif:    "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Type scale (fluid) */
+  --step--1: clamp(0.85rem, 0.82rem + 0.1vw, 0.95rem);
+  --step-0:  clamp(1.00rem, 0.96rem + 0.2vw, 1.10rem);
+  --step-1:  clamp(1.25rem, 1.13rem + 0.6vw, 1.50rem);
+  --step-2:  clamp(1.56rem, 1.38rem + 0.9vw, 1.88rem);
+  --step-3:  clamp(1.95rem, 1.70rem + 1.2vw, 2.35rem);
+  --step-4:  clamp(2.44rem, 2.08rem + 1.6vw, 2.94rem);
+
+  /* Layout */
+  --container: 72rem;   /* max width */
+  --radius:    0.75rem; /* rounded corners */
+  --shadow:    0 1px 2px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+
+  /* Spacing scale (multiples of 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+}
+
+/* ------------------------------
+   Design Tokens — Dusk (dark)
+------------------------------ */
+.theme-dusk {
+  --bg:            #0b1020;   /* deep twilight indigo */
+  --surface:       #121a2d;   /* panels */
+  --text:          #e5e7eb;   /* light gray */
+  --muted:         #cbd5e1;   /* slate 300 */
+  --heading:       #f8fafc;   /* near white */
+  --brand:         #fb923c;   /* warm dusk orange */
+  --brand-strong:  #f97316;
+  --accent:        #93c5fd;   /* soft blue */
+  --link:          #93c5fd;
+  --border:        #1f2937;   /* dark divider */
+  --focus:         #22d3ee;   /* bright cyan */
+  --shadow:        0 1px 2px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.45);
+}
+
+/* ------------------------------
+   Base Elements
+------------------------------ */
+* { box-sizing: border-box; }
+html:focus-within { scroll-behavior: smooth; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+img, picture, video { max-width: 100%; height: auto; display: block; }
+
+/* Skip link — visible on focus */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+}
+.skip-link:focus {
+  left: 0; z-index: 1000; padding: var(--space-3) var(--space-4);
+  background: var(--brand); color: #fff; text-decoration: none;
+  border-bottom-right-radius: var(--radius);
+}
+
+/* Links */
+a { color: var(--link); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Focus visible for all interactive elements */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Containers & Sections */
+.wrapper { max-width: var(--container); margin-inline: auto; padding-inline: var(--space-4); }
+section, article { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-6); box-shadow: var(--shadow); }
+section + section, article + article { margin-top: var(--space-8); }
+
+/* Heading hierarchy */
+h1, h2, h3 { line-height: 1.2; color: var(--heading); }
+h1 { font-family: var(--font-serif); font-size: var(--step-4); letter-spacing: -0.01em; }
+h2 { font-weight: 800; font-size: var(--step-2); margin-top: var(--space-10); }
+h3 { font-weight: 700; font-size: var(--step-1); margin-top: var(--space-6); }
+
+/* Header & Primary Nav */
+header {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 22%, var(--bg)), var(--bg));
+  border-bottom: 1px solid var(--border);
+}
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) 0; }
+.brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--step-2);
+  color: var(--heading);
+  text-decoration: none;
+}
+nav[aria-label="Primary"] ul {
+  list-style: none; display: flex; gap: clamp(0.75rem, 1.5vw, 1.25rem); padding: 0; margin: 0;
+}
+nav[aria-label="Primary"] a {
+  display: inline-block; padding: 0.5rem 0.75rem; border-radius: 999px; text-decoration: none; color: var(--text);
+}
+nav[aria-label="Primary"] a:hover { background: color-mix(in oklab, var(--brand) 12%, var(--surface)); }
+nav[aria-label="Primary"] a[aria-current="page"] {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-strong) 60%, black);
+}
+
+/* Main layout */
+main { padding-block: var(--space-10); }
+main > * + * { margin-top: var(--space-8); }
+
+/* Figure */
+figure { margin: 0; }
+figcaption { margin-top: var(--space-2); color: var(--muted); font-size: var(--step--1); }
+
+/* Aside as callout */
+aside { background: color-mix(in oklab, var(--surface), var(--brand) 6%); border: 1px dashed var(--border); border-radius: var(--radius); padding: var(--space-6); }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); margin-top: var(--space-12); }
+footer .site-footer { padding-block: var(--space-6); color: var(--muted); }
+
+/* Contact form */
+form fieldset { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-6); }
+label { display: block; font-weight: 600; margin-bottom: var(--space-2); }
+input, select, textarea {
+  width: 100%; padding: var(--space-3) var(--space-4); border: 1px solid var(--border); border-radius: 0.5rem; font: inherit; background: var(--surface); color: var(--text);
+}
+input::placeholder, textarea::placeholder { color: color-mix(in oklab, var(--muted), var(--text) 30%); }
+button[type="submit"] {
+  appearance: none; border: none; border-radius: 999px; padding: 0.7rem 1rem; font-weight: 700; cursor: pointer;
+  background: var(--brand); color: white; box-shadow: var(--shadow);
+}
+button[type="submit"]:hover { background: var(--brand-strong); }
+button[type="submit"]:active { transform: translateY(1px); }
+
+/* Prose spacing */
+p { max-width: 65ch; }
+ul, ol { padding-left: 1.25rem; }
+
+/* Cards for articles on Projects */
+.article-card { display: grid; gap: var(--space-4); grid-template-columns: 160px 1fr; align-items: start; }
+@media (max-width: 640px) {
+  .article-card { grid-template-columns: 1fr; }
+}
+
+/* Tables (if any later) */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: var(--space-3); border-bottom: 1px solid var(--border); text-align: left; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
