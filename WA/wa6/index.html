@@ -1,0 +1,182 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roots Boulder — Community Hub</title>
+  <meta name="description" content="Roots Music Festival Boulder — lineup, schedule, maps & accessibility, tickets, volunteers, vendors, and FAQs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="roots-design.css">
+  <link rel="stylesheet" href="roots-grid.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <div class="wrapper site-header">
+      <a class="brand" href="#home">Roots Boulder</a>
+      <div class="controls">
+        <button id="theme-toggle" class="button button--secondary" aria-pressed="false">Switch to Dusk</button>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-controls="primary-menu" aria-expanded="false">
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+
+        <ul id="primary-menu" class="nav-menu">
+          <li><a href="#home" aria-current="page">Home</a></li>
+          <li><a href="#lineup">Lineup</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#map-ada">Map & Accessibility</a></li>
+          <li><a href="#tickets">Tickets</a></li>
+          <li><a href="#volunteer">Volunteer</a></li>
+          <li><a href="#vendors">Vendors</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="home" class="wrapper home-grid">
+
+      <section class="section-hero mt-0">
+        <h1>Roots Music Festival — Boulder</h1>
+        <p class="status">Community-first hub: lineup, schedule, maps & accessibility, and participation (tickets, volunteers, vendors).</p>
+        <p><a class="button" href="#schedule">See Today’s Schedule</a></p>
+
+        <div class="sticky-actions" aria-label="Quick filters">
+          <div class="controls">
+            <div class="control">
+              <label for="lineup-search">Search lineup</label>
+              <input id="lineup-search" type="search" placeholder="Type an artist name…" />
+            </div>
+            <span id="lineup-status" class="status" aria-live="polite">Showing all artists</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="lineup" class="section-lineup" aria-labelledby="lineup-heading">
+        <h2 id="lineup-heading">Lineup</h2>
+        <div class="grid-3">
+          <article class="card">
+            <img src="images/project-placeholder.jpg" alt="Band promotional image: Highland Pines">
+            <div>
+              <h3>Highland Pines</h3>
+              <p>Bluegrass & folk fusion from the Front Range.</p>
+              <span class="badge">Main Stage</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="images/project-placeholder.jpg" alt="Artist promotional image: Maple & Stone">
+            <div>
+              <h3>Maple & Stone</h3>
+              <p>Americana harmonies with strings and pedal steel.</p>
+              <span class="badge">Meadow Stage</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="images/project-placeholder.jpg" alt="Artist promotional image: Foothill Ramblers">
+            <div>
+              <h3>Foothill Ramblers</h3>
+              <p>Foot-stomping roots with a modern twist.</p>
+              <span class="badge">Porch Stage</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="schedule" class="section-schedule" aria-labelledby="schedule-heading">
+        <h2 id="schedule-heading">Schedule</h2>
+
+        <fieldset class="filters">
+          <legend>Filter schedule</legend>
+          <div class="controls">
+            <div class="control">
+              <label for="filter-day">Day</label>
+              <select id="filter-day">
+                <option value="all">All days</option>
+                <option value="fri">Friday</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="filter-stage">Stage</label>
+              <select id="filter-stage">
+                <option value="all">All stages</option>
+                <option value="main">Main Stage</option>
+                <option value="meadow">Meadow Stage</option>
+                <option value="porch">Porch Stage</option>
+              </select>
+            </div>
+            <span id="schedule-status" class="status" aria-live="polite">Showing all sets</span>
+          </div>
+        </fieldset>
+
+        <ul id="schedule-list">
+          <li data-day="fri" data-stage="main">Fri — Main Stage — Highland Pines — 7:30 PM</li>
+          <li data-day="sat" data-stage="meadow">Sat — Meadow Stage — Maple & Stone — 5:00 PM</li>
+          <li data-day="sun" data-stage="porch">Sun — Porch Stage — Foothill Ramblers — 2:00 PM</li>
+          <li data-day="sat" data-stage="main">Sat — Main Stage — Nightgrass All‑Stars — 9:00 PM</li>
+          <li data-day="fri" data-stage="porch">Fri — Porch Stage — Open Jam — 4:00 PM</li>
+        </ul>
+      </section>
+
+      <section id="map-ada" class="section-map" aria-labelledby="map-heading">
+        <h2 id="map-heading">Map & Accessibility</h2>
+        <p>ADA routes, ramp locations, shuttle stops, hydration, first aid, and quiet zones. (Map placeholder.)</p>
+        <ul>
+          <li>Shuttle stops: North Gate, South Parking</li>
+          <li>ADA viewing area at Main Stage (front-left)</li>
+          <li>Hydration & First Aid at all stage hubs</li>
+        </ul>
+      </section>
+
+      <section id="tickets" class="section-tickets" aria-labelledby="tickets-heading">
+        <h2 id="tickets-heading">Tickets</h2>
+        <p>General Admission, Student, and Family packs. Entry policies and will-call info listed here. (Placeholder buttons.)</p>
+        <p><a class="button" href="#">Buy GA</a> <a class="button button--secondary" href="#">Student</a></p>
+      </section>
+
+      <section id="volunteer" class="section-volunteer" aria-labelledby="volunteer-heading">
+        <h2 id="volunteer-heading">Volunteer</h2>
+        <p>Help with gates, info booths, and sustainability stations. Requirements and shift sign-up details here.</p>
+        <p><a class="button" href="#">Volunteer Form</a></p>
+      </section>
+
+      <section id="vendors" class="section-vendors" aria-labelledby="vendors-heading">
+        <h2 id="vendors-heading">Vendors</h2>
+        <p>Food trucks, crafts, and community orgs. Apply to vend; see health & safety requirements and booth specs.</p>
+        <p><a class="button" href="#">Vendor Application</a></p>
+      </section>
+
+      <section id="faq" class="section-faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">FAQ</h2>
+        <ul>
+          <li><strong>What’s allowed?</strong> See the allowed items list and bag policy.</li>
+          <li><strong>Parking/Shuttles?</strong> Use the North/South shuttle loop; limited on-site parking.</li>
+          <li><strong>Accessibility?</strong> ADA viewing, ramps, and shuttle access points indicated on the map.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrapper site-footer">
+      <p>© <time datetime="2025">2025</time> Roots Boulder —
+        <a href="community.html">Community Research Summary</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

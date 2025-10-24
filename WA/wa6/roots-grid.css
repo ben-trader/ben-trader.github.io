@@ -1,0 +1,152 @@
+
+/* Roots Boulder — Grid Layouts & Responsive Areas
+   Load AFTER roots-design.css
+*/
+
+/* ==============
+   Homepage Grid
+   ============== */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hero"
+    "lineup"
+    "schedule"
+    "map"
+    "tickets"
+    "volunteer"
+    "vendors"
+    "faq";
+  gap: var(--space-8);
+}
+
+/* Named areas */
+.section-hero      { grid-area: hero; }
+.section-lineup    { grid-area: lineup; }
+.section-schedule  { grid-area: schedule; }
+.section-map       { grid-area: map; }
+.section-tickets   { grid-area: tickets; }
+.section-volunteer { grid-area: volunteer; }
+.section-vendors   { grid-area: vendors; }
+.section-faq       { grid-area: faq; }
+
+/* 2-column layout at ≥900px: prioritize schedule & map adjacent, lineup large */
+@media (min-width: 900px) {
+  .home-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-areas:
+      "hero     hero"
+      "lineup   lineup"
+      "schedule map"
+      "tickets  volunteer"
+      "vendors  faq";
+  }
+}
+
+/* 3-column layout at ≥1200px: hero wide, lineup spans 2 cols, schedule pinned left */
+@media (min-width: 1200px) {
+  .home-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "hero     hero     hero"
+      "lineup   lineup   lineup"
+      "schedule schedule map"
+      "tickets  volunteer map"
+      "vendors  faq      map";
+  }
+}
+
+/* Grid helpers for internal content */
+.grid-2 {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 800px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+.grid-3 {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1000px) {
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* Accessible sticky subnav (optional) */
+.sticky-actions {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* ==============
+   Community Page Grid (sidebar + content)
+   ============== */
+.community-grid {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "content";
+}
+
+@media (min-width: 900px) {
+  .community-grid {
+    grid-template-columns: 260px 1fr;
+    grid-template-areas: "sidebar content";
+  }
+  .toc { position: sticky; top: 1rem; align-self: start; }
+}
+
+.toc     { grid-area: sidebar; }
+.content { grid-area: content; }
+
+.toc nav ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid; gap: .25rem;
+}
+.toc nav a {
+  display: block;
+  padding: .35rem .5rem;
+  border-radius: .35rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.toc nav a:focus-visible,
+.toc nav a:hover { background: color-mix(in oklab, var(--brand) 12%, var(--surface)); }
+
+/* Simple badges */
+.badge {
+  display: inline-block;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand) 12%, var(--surface));
+  border: 1px solid var(--border);
+  font-size: var(--step--1);
+}
+
+/* Schedule chips and filter controls */
+.controls {
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem;
+  align-items: center;
+}
+.control {
+  display: grid; gap: .25rem;
+}
+fieldset.filters {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+/* Feedback/status */
+.status {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
